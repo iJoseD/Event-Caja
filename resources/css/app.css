@@ -1,0 +1,18 @@
+body {
+	font-family: 'DM Sans', sans-serif !important;
+}
+
+.overflow {
+	overflow: auto;
+}
+
+#offcanvasNuevoPedido {
+	width: 90% !important;
+}
+
+.imgLogin {
+	background-image: url(/resources/img/imgLogin.jpg);
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
