@@ -122,7 +122,7 @@
                                             } ?>
 
                                             <div class="col-md-6 col-lg-6 col-12 mb-4">
-                                                <div class="card <?php echo $Borde; ?>">
+                                                <div class="card h-100 <?php echo $Borde; ?>">
                                                     <div class="card-header <?php echo $Fondo; ?>">
                                                         <h1 class="fw-bold"><?php echo $Row["Ubicacion"]; ?></h1>
                                                         <span>Código de venta: <?php echo $Row["Codigo"]; ?></span>
