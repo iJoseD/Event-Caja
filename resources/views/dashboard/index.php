@@ -146,12 +146,31 @@
                                                         ?>
                                                         <div class="row">
                                                             <div class="col-12">
-                                                                <p><span class="fw-bold">Método de pago:</span> <?php echo $Row["MetodoDePago"]; ?></p>
-                                                                <?php
-                                                                    if ( $Row["MetodoDePago"] == 'Dividido' ) { ?>
-                                                                        <p><span class="fw-bold">Efectivo: </span>$ <?php echo number_format($Row["Efectivo"], 0, '.', ','); ?> | <span class="fw-bold">Tarjeta: </span>$ <?php echo number_format($Row["Tarjeta"], 0, '.', ','); ?></p>
-                                                                    <?php }
-                                                                ?>
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="fw-bold">Método de pago</td>
+                                                                            <td><?php echo $Row["MetodoDePago"]; ?></td>
+                                                                        </tr>
+                                                                        <?php
+                                                                            if ( $Row["MetodoDePago"] == 'Dividido' ) { ?>
+                                                                                <p><span class="fw-bold">Efectivo: </span>$ <?php echo number_format($Row["Efectivo"], 0, '.', ','); ?> | <span class="fw-bold">Tarjeta: </span>$ <?php echo number_format($Row["Tarjeta"], 0, '.', ','); ?></p>
+                                                                                <tr>
+                                                                                    <td class="fw-bold">Efectivo</td>
+                                                                                    <td><?php echo number_format($Row["Efectivo"], 0, '.', ','); ?></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="fw-bold">Tarjeta</td>
+                                                                                    <td><?php echo number_format($Row["Tarjeta"], 0, '.', ','); ?></td>
+                                                                                </tr>
+                                                                            <?php }
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td class="fw-bold">Total pagado</td>
+                                                                            <td><?php echo number_format($Row["Total"], 0, '.', ','); ?></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                     </div>
