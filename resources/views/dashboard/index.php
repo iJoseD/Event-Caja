@@ -103,24 +103,21 @@
                                             WHERE
                                                 Tickets.EventoID = '$EventoID'
                                                 AND Tickets.PdvID = '$PdvID'
-                                                AND Ventas.Despachado = 'No'
                                             ORDER BY Ventas.FechaRegistro DESC";
                                     $Result = $conn->query($Sql);
 
                                     if ($Result->num_rows > 0) {
                                         while($Row = $Result->fetch_assoc()) {
                                             $Codigo = $Row["Codigo"];
+                                            $ValidacionCaja = $Row["ValidacionCaja"];
 
                                             $FechaRegistro = new DateTime( $Row["FechaRegistro"] );
                                             $FechaActual = new DateTime();
                                             $DiferenciaMinutos = $FechaRegistro->diff($FechaActual)->format('%i');
 
-                                            if ($DiferenciaMinutos < 2) {
+                                            if ($ValidacionCaja == 'Si') {
                                                 $Borde = 'border border-success border-2';
                                                 $Fondo = 'bg-success-subtle';
-                                            } elseif ($DiferenciaMinutos > 2 && $DiferenciaMinutos < 3) {
-                                                $Borde = 'border border-warning border-2';
-                                                $Fondo = 'bg-warning-subtle';
                                             } else {
                                                 $Borde = 'border border-danger border-2';
                                                 $Fondo = 'bg-danger-subtle';
