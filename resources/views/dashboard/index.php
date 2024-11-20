@@ -103,7 +103,7 @@
                                             WHERE
                                                 Tickets.EventoID = '$EventoID'
                                                 AND Tickets.PdvID = '$PdvID'
-                                            ORDER BY Ventas.FechaRegistro DESC";
+                                            ORDER BY Ventas.ValidacionCaja DESC";
                                     $Result = $conn->query($Sql);
 
                                     if ($Result->num_rows > 0) {
