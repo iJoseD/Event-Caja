@@ -97,12 +97,10 @@
                             <div class="row">
                                 <input type="hidden" id="UltimoID" value="<?php echo ObtenerUltimoID($EventoID, $PdvID, $conn); ?>">
                                 <?php
-                                    $Sql = "SELECT Ventas.FechaRegistro, Tickets.Ubicacion, Ventas.Codigo, Ventas.ValidacionCaja
+                                    $Sql = "SELECT Tickets.Ubicacion, Ventas.*
                                             FROM Ventas
                                             JOIN Tickets ON Ventas.TicketID = Tickets.ID
-                                            WHERE
-                                                Tickets.EventoID = '$EventoID'
-                                                AND Tickets.PdvID = '$PdvID'
+                                            WHERE Tickets.EventoID = '$EventoID' AND Tickets.PdvID = '$PdvID'
                                             ORDER BY Ventas.ValidacionCaja DESC";
                                     $Result = $conn->query($Sql);
 
@@ -141,14 +139,19 @@
 
                                                             $Total = 0;
                                                             if ($ResultItems->num_rows > 0) {
-                                                                while($Row = $ResultItems->fetch_assoc()) { ?>
-                                                                    <p><span class="badge bg-secondary"><?php echo $Row["Cantidad"]; ?></span> <?php echo $Row["Nombre"]; ?></p>
+                                                                while($RowItems = $ResultItems->fetch_assoc()) { ?>
+                                                                    <p><span class="badge bg-secondary"><?php echo $RowItems["Cantidad"]; ?></span> <?php echo $RowItems["Nombre"]; ?></p>
                                                                 <?php }
                                                             }
                                                         ?>
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p><span class="fw-bold">Método de pago:</span> <?php echo $Row["MetodoDePago"]; ?></p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="card-footer text-end">
-                                                        <button type="button" class="btn btn-primary btn-sm FinalizarPedido" data-Codigo="<?php echo $Codigo; ?>">Validar</button>
+                                                        <button type="button" class="btn btn-primary btn-sm FinalizarPedido" data-Codigo="<?php echo $Codigo; ?>">Marcar como revisado</button>
                                                     </div>
                                                 </div>
                                             </div>
