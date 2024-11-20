@@ -147,6 +147,11 @@
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <p><span class="fw-bold">Método de pago:</span> <?php echo $Row["MetodoDePago"]; ?></p>
+                                                                <?php
+                                                                    if ( $Row["MetodoDePago"] == 'Dividido' ) { ?>
+                                                                        <p><span class="fw-bold">Efectivo: </span>$ <?php echo number_format($Row["Efectivo"], 0, '.', ','); ?> | <span class="fw-bold">Tarjeta: </span>$ <?php echo number_format($Row["Tarjeta"], 0, '.', ','); ?></p>
+                                                                    <?php }
+                                                                ?>
                                                             </div>
                                                         </div>
                                                     </div>
