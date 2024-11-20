@@ -124,7 +124,7 @@ if ($Accion === 'ObtenerUltimoID') {
 
 } elseif ($Accion === 'FinalizarPedido') {
     // Preparar la consulta SQL para actualizar datos
-    $sql = "UPDATE Ventas SET Despachado = 'Si' WHERE Codigo = '$Codigo'";
+    $sql = "UPDATE Ventas SET ValidacionCaja = 'Si' WHERE Codigo = '$Codigo'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Datos guardados exitosamente";

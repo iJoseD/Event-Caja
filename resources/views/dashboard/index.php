@@ -148,7 +148,7 @@
                                                         ?>
                                                     </div>
                                                     <div class="card-footer text-end">
-                                                        <button type="button" class="btn btn-primary btn-sm FinalizarPedido" data-Codigo="<?php echo $Codigo; ?>">Finalizar</button>
+                                                        <button type="button" class="btn btn-primary btn-sm FinalizarPedido" data-Codigo="<?php echo $Codigo; ?>">Validar</button>
                                                     </div>
                                                 </div>
                                             </div>
