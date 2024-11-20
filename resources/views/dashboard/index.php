@@ -97,7 +97,7 @@
                             <div class="row">
                                 <input type="hidden" id="UltimoID" value="<?php echo ObtenerUltimoID($EventoID, $PdvID, $conn); ?>">
                                 <?php
-                                    $Sql = "SELECT Ventas.FechaRegistro, Tickets.Ubicacion, Ventas.Codigo
+                                    $Sql = "SELECT Ventas.FechaRegistro, Tickets.Ubicacion, Ventas.Codigo, Ventas.ValidacionCaja
                                             FROM Ventas
                                             JOIN Tickets ON Ventas.TicketID = Tickets.ID
                                             WHERE
