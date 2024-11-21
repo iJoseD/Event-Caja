@@ -49,41 +49,32 @@ if ($Accion === 'ObtenerUltimoID') {
             echo $Row["ID"];
         }
     }
-    
+
     $conn->close();
 
 } elseif ($Accion === 'ActualizarPedidos') {
     $Html = '<div class="row">
         <input type="hidden" id="UltimoID" value="'. ObtenerUltimoID($EventoID, $PdvID, $conn) .'">';
-        $Sql = "SELECT Ventas.FechaRegistro, Tickets.Ubicacion, Ventas.Codigo
+        $Sql = "SELECT Tickets.Ubicacion, Ventas.*
                 FROM Ventas
                 JOIN Tickets ON Ventas.TicketID = Tickets.ID
-                WHERE
-                    Tickets.EventoID = '$EventoID'
-                    AND Tickets.PdvID = '$PdvID'
-                    AND Ventas.Despachado = 'No'
+                WHERE Tickets.EventoID = '$EventoID' AND Tickets.PdvID = '$PdvID'
                 ORDER BY Ventas.FechaRegistro DESC";
         $Result = $conn->query($Sql);
 
         if ($Result->num_rows > 0) {
             while($Row = $Result->fetch_assoc()) {
                 $Codigo = $Row["Codigo"];
+                $ValidacionCaja = $Row["ValidacionCaja"];
 
-                $FechaRegistro = new DateTime( $Row["FechaRegistro"] );
-                $FechaActual = new DateTime();
-                $DiferenciaMinutos = $FechaRegistro->diff($FechaActual)->format('%i');
-
-                if ($DiferenciaMinutos < 2) {
+                if ($ValidacionCaja == 'Si') {
                     $Borde = 'border border-success border-2';
                     $Fondo = 'bg-success-subtle';
-                } elseif ($DiferenciaMinutos > 2 && $DiferenciaMinutos < 3) {
-                    $Borde = 'border border-warning border-2';
-                    $Fondo = 'bg-warning-subtle';
                 } else {
                     $Borde = 'border border-danger border-2';
                     $Fondo = 'bg-danger-subtle';
                 }
-                
+
                 $Html .= '<div class="col-md-6 col-lg-6 col-12 mb-4">
                     <div class="card h-100 '. $Borde .'">
                         <div class="card-header '. $Fondo .'">
@@ -106,6 +97,33 @@ if ($Accion === 'ObtenerUltimoID') {
                                 }
                             }
                         $Html .= '</div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-bold">Método de pago</td>
+                                            <td>'. $Row["MetodoDePago"] .'</td>
+                                        </tr>';
+                                        if ( $Row["MetodoDePago"] == 'Dividido' ) {
+                                            $Html .= '<p><span class="fw-bold">Efectivo: </span>$ '. number_format($Row["Efectivo"], 0, '.', ',') .' | <span class="fw-bold">Tarjeta: </span>$ '. number_format($Row["Tarjeta"], 0, '.', ',') .'</p>
+                                            <tr>
+                                                <td class="fw-bold">Efectivo</td>
+                                                <td>'. number_format($Row["Efectivo"], 0, '.', ',') .'</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">Tarjeta</td>
+                                                <td>'. number_format($Row["Tarjeta"], 0, '.', ',') .'</td>
+                                            </tr>';
+                                        }
+                                        $Html .= '<tr>
+                                            <td class="fw-bold">Total pagado</td>
+                                            <td>'. number_format($Row["Total"], 0, '.', ',') .'</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div class="card-footer text-end">
                             <button type="button" class="btn btn-primary btn-sm FinalizarPedido" data-Codigo="'. $Codigo .'">Finalizar</button>
                         </div>

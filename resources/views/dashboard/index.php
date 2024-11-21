@@ -109,10 +109,6 @@
                                             $Codigo = $Row["Codigo"];
                                             $ValidacionCaja = $Row["ValidacionCaja"];
 
-                                            $FechaRegistro = new DateTime( $Row["FechaRegistro"] );
-                                            $FechaActual = new DateTime();
-                                            $DiferenciaMinutos = $FechaRegistro->diff($FechaActual)->format('%i');
-
                                             if ($ValidacionCaja == 'Si') {
                                                 $Borde = 'border border-success border-2';
                                                 $Fondo = 'bg-success-subtle';
