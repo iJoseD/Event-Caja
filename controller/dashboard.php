@@ -92,8 +92,8 @@ if ($Accion === 'ObtenerUltimoID') {
 
                             $Total = 0;
                             if ($ResultItems->num_rows > 0) {
-                                while($Row = $ResultItems->fetch_assoc()) {
-                                    $Html .= '<p><span class="badge bg-secondary">'. $Row["Cantidad"] .'</span> '. $Row["Nombre"] .'</p>';
+                                while($RowItems = $ResultItems->fetch_assoc()) {
+                                    $Html .= '<p><span class="badge bg-secondary">'. $RowItems["Cantidad"] .'</span> '. $RowItems["Nombre"] .'</p>';
                                 }
                             }
                         $Html .= '</div>
